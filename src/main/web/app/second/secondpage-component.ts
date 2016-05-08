@@ -1,5 +1,6 @@
 import {Component} from 'angular2/core';
 import {SharedService} from '../service/sharedService';
+import {RestService} from '../service/restService';
 import {Router} from 'angular2/router';
 import {Http, HTTP_PROVIDERS} from 'angular2/http';
 @Component({
@@ -9,29 +10,30 @@ import {Http, HTTP_PROVIDERS} from 'angular2/http';
 
 export class SecondPageComponent   {
 
-  router:Router;
-
-  service:SharedService;
-
-  twitterId: string;
-
-  http:Http;
-
-  url:string = 'http://jsonplaceholder.typicode.com/posts/1';
-
-  result:string;
+  private router:Router;
+  private service:SharedService;
+  private restService : RestService;
+  private http:Http;
+  private twitterId: string;
+  private jsonResponse: string;
+  private message: string;
+  private result:string;
   
-  constructor(router:Router,service:SharedService, http:Http)
+  constructor(router:Router,service:SharedService, http:Http, restService:RestService)
   {
     this.router=router;
     this.service=service;
-    this.http=http;
+    this.restService = restService;
     this.twitterId=service.getData();
-
-    this.http.get(this.url).subscribe((data) => {
-        this.result = JSON.stringify(data);
-    });
   }
+
+  ngOnInit() {
+        this.restService.getTest().subscribe(
+            data => {this.jsonResponse = JSON.stringify(data),
+                     this.message = data.test.message},
+            () => console.log('../test/get/json returned: \n' + this.jsonResponse)
+        );
+    }
 
   back()
   {

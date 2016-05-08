@@ -9,9 +9,9 @@ import {Router} from 'angular2/router';
 
 export class HomePageComponent { 
 
-  service:SharedService;
+  private service:SharedService;
 
-  router:Router;
+  private router:Router;
 
   constructor(service:SharedService,router:Router){
     this.service=service;
