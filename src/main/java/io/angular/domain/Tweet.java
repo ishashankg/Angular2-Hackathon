@@ -1,4 +1,4 @@
-package com.test;
+package io.angular.domain;
 
 public class Tweet {
 	private String text;

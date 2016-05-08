@@ -1,4 +1,4 @@
-package com.test;
+package io.angular.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,24 +29,24 @@ public class TwitterRestController {
 	private String accessTokenSecret;
 
 	@RequestMapping("/username")
-	public @ResponseBody List<com.test.Tweet> searchForUser(@RequestParam(value = "name") String name) {
+	public @ResponseBody List<io.angular.domain.Tweet> searchForUser(@RequestParam(value = "name") String name) {
 		return searchTwitterWithSpringTemplate(name, 20);
 	}
 
 	@RequestMapping("/usernameAndCount")
-	public @ResponseBody List<com.test.Tweet> searchForUserAndCount(@RequestParam(value = "name") String name,
+	public @ResponseBody List<io.angular.domain.Tweet> searchForUserAndCount(@RequestParam(value = "name") String name,
 			@RequestParam(value = "count") int count) {
 		return searchTwitterWithSpringTemplate(name, count);
 	}
 
-	private List<com.test.Tweet> searchTwitterWithSpringTemplate(String name, int count) {
+	private List<io.angular.domain.Tweet> searchTwitterWithSpringTemplate(String name, int count) {
 		TwitterTemplate twitterTemplate = new TwitterTemplate(consumerKey, consumerSecret, accessToken,
 				accessTokenSecret);
 		TimelineOperations timelineOperations = twitterTemplate.timelineOperations();
 		List<Tweet> userTimeTweets = timelineOperations.getUserTimeline(name, count);
-		List<com.test.Tweet> tweets = new ArrayList<com.test.Tweet>();
+		List<io.angular.domain.Tweet> tweets = new ArrayList<io.angular.domain.Tweet>();
 		for (Tweet userTimeTweet : userTimeTweets) {
-			com.test.Tweet tweet = new com.test.Tweet();
+			io.angular.domain.Tweet tweet = new io.angular.domain.Tweet();
 			tweet.setText(userTimeTweet.getText());
 			tweets.add(tweet);
 		}

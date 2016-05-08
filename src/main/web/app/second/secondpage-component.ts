@@ -28,10 +28,8 @@ export class SecondPageComponent   {
   }
 
   ngOnInit() {
-        this.restService.getTest().subscribe(
-            data => {this.jsonResponse = JSON.stringify(data),
-                     this.message = data.test.message},
-            () => console.log('../test/get/json returned: \n' + this.jsonResponse)
+        this.restService.callRestService(this.twitterId).subscribe(
+            data => {this.jsonResponse = JSON.stringify(data)}
         );
     }
 

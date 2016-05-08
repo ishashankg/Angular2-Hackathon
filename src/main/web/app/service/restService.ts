@@ -10,8 +10,8 @@ export class RestService {
 
     constructor(@Inject(Http) private http: Http) {}
 
-    getTest() {
-        return this.http.get('/test/get/json')
+    callRestService(twitterId) {
+        return this.http.get('/api/username?name='+twitterId)
             .map((res:Response) => res.json());
     }
 }
