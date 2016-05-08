@@ -1,20 +1,35 @@
-'use strict';
+import {Component, OnInit} from 'angular2/core';
+import {Http, HTTP_PROVIDERS} from 'angular2/http';
+import {Router, RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
+import {SharedService} from './service/sharedService';
+import {HomePageComponent} from './home/homepage-component';
+import {SecondPageComponent} from './second/secondpage-component';
 
-import {Component} from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
-
-import {HelloComponent} from './hello/hello.component';
-import {HomeComponent} from './home/home.component';
+import 'rxjs/Rx';
 
 @Component({
-    selector: 'spring-boot-angular2',
-    template: '<router-outlet></router-outlet>',
-    directives: [ROUTER_DIRECTIVES]
+    selector: 'my-app',
+    directives: [ROUTER_DIRECTIVES],
+    providers:[SharedService],
+    templateUrl: 'app/app.component.html'
 })
+
 @RouteConfig([
-        {path: '/home', name: 'HomePage', component: HomeComponent},
-        {path: '/hello', name: 'HelloPage', component: HelloComponent},
-        {path: '/**', redirectTo: ['HomePage']}
-])
-export class AppComponent {
+  {path: '/homepage', as: 'HomePageComponent', useAsDefault: true, component: HomePageComponent},
+  {path: '/secondpage', as: 'SecondPageComponent', useAsDefault: false, component: SecondPageComponent}
+ ])
+
+export class AppComponent implements OnInit{
+
+   router:Router;
+
+  constructor(router:Router)
+  {
+    this.router=router;
+  }
+  
+  ngOnInit() {
+    this.router.navigate(['/HomePageComponent']);
+  }
+  
 }

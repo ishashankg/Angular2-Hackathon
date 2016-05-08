@@ -1,19 +1,17 @@
 {
   "compilerOptions": {
-      "target": "es6",
-      "module": "system",
-      "moduleResolution": "node",
-      "sourceMap": true,
-      "emitDecoratorMetadata": true,
-      "experimentalDecorators": true,
-      "removeComments": false,
-      "noImplicitAny": false,
-      "outDir": "../resources/static/app"
+    "target": "es5",
+    "module": "system",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": false,
+    "noImplicitAny": false
   },
-
   "exclude": [
-      "node_modules",
-      "typings/main",
-      "typings/main.d.ts"
+    "node_modules",
+    "typings/main",
+    "typings/main.d.ts"
   ]
 }
